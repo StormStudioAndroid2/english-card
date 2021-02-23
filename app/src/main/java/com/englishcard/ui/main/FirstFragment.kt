@@ -8,21 +8,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.englishcard.R
-import com.englishcard.model.cardset.CardSetEntity
+import com.englishcard.model.database.CardSetEntity
+import com.englishcard.model.domain.cards.CardSet
 import com.englishcard.ui.main.adapter.CardSetAdapter
+import com.englishcard.ui.main.adapter.CardSetListener
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FirstFragment(cardSetListener: CardSetListener) : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private val adapter = CardSetAdapter(emptyList())
+    private val adapter = CardSetAdapter(emptyList(), cardSetListener)
 
     companion object {
 
-        fun createInstance() : FirstFragment =
-            FirstFragment().apply {
+        fun createInstance(cardSetListener: CardSetListener) : FirstFragment =
+            FirstFragment(cardSetListener).apply {
                 arguments = Bundle()
                     .also { args ->
                         // put in bundle info from activity
@@ -37,10 +39,10 @@ class FirstFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view =  inflater.inflate(R.layout.fragment_first, container, false)
+        val view =  inflater.inflate(R.layout.fragment_first, container, false)
         recyclerView = view.findViewById(R.id.recycler_view_card_set)
         recyclerView.adapter = adapter
-        recyclerView.setLayoutManager(LinearLayoutManager(context))
+        recyclerView.layoutManager = LinearLayoutManager(context)
         return view
     }
 
@@ -49,7 +51,7 @@ class FirstFragment : Fragment() {
 
     }
 
-    fun updateRecyclerView(cardSets: List<CardSetEntity>) {
+    fun updateRecyclerView(cardSets: List<CardSet>) {
         adapter.update(cardSets)
     }
 

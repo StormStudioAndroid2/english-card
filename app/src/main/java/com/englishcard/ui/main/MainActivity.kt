@@ -2,15 +2,13 @@ package com.englishcard.ui.main
 
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.commit
-import androidx.recyclerview.widget.RecyclerView
 import com.englishcard.R
-import com.englishcard.model.cardset.CardSetEntity
-import com.englishcard.ui.main.adapter.CardSetAdapter
+import com.englishcard.model.database.CardSetEntity
+import com.englishcard.model.domain.cards.CardSet
 
 
 interface MainView {
@@ -19,20 +17,19 @@ interface MainView {
 
     fun createCardSetRecyclerViewFragment()
 
+    fun createCardRecyclerViewFragment()
+
     fun createCardSetDialog()
 
     fun notifyCardSetAdapter()
 
-    fun updateCardSetRecyclerView(cardSets: List<CardSetEntity>)
+    fun updateCardSetRecyclerView(cardSets: List<CardSet>)
 
     interface DialogCallback {
 
         fun onDialogYes(cardSetName : String, cardSetLanguage: String)
     }
 
-    interface CardSetFragmentCallback {
-
-    }
 }
 
 class MainActivity : AppCompatActivity(), MainView, MainView.DialogCallback {
@@ -73,10 +70,18 @@ class MainActivity : AppCompatActivity(), MainView, MainView.DialogCallback {
         supportFragmentManager.commit {
             replace(
                 R.id.main_container_fragment,
-                FirstFragment.createInstance(), "CARD_SET_FRAGMENT"
+                FirstFragment.createInstance(mainPresenter), "CARD_SET_FRAGMENT"
             )
         }
+    }
 
+    override fun createCardRecyclerViewFragment() {
+        supportFragmentManager.commit {
+            replace(
+                R.id.main_container_fragment,
+                SecondFragment.createInstance(mainPresenter), "CARD_SET_FRAGMENT"
+            )
+        }
     }
 
     override fun createCardSetDialog() {
@@ -87,7 +92,7 @@ class MainActivity : AppCompatActivity(), MainView, MainView.DialogCallback {
         (supportFragmentManager.findFragmentByTag("CARD_SET_FRAGMENT") as? FirstFragment)?.notifyAdapter()
     }
 
-    override fun updateCardSetRecyclerView(cardSets: List<CardSetEntity>) {
+    override fun updateCardSetRecyclerView(cardSets: List<CardSet>) {
         (supportFragmentManager.findFragmentByTag("CARD_SET_FRAGMENT") as? FirstFragment)?.updateRecyclerView(cardSets)
 
     }

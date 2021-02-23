@@ -7,26 +7,42 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.englishcard.R
+import com.englishcard.ui.main.adapter.CardAdapter
+import com.englishcard.ui.main.adapter.CardListener
+import com.englishcard.ui.main.adapter.CardSetListener
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class SecondFragment(cardListener: CardListener) : Fragment() {
+
+    private val cardAdapter = CardAdapter(emptyList(), cardListener)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        val  view = inflater.inflate(R.layout.fragment_second, container, false)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_card)
+        recyclerView.layoutManager = GridLayoutManager(context, 3)
+        recyclerView.adapter = cardAdapter
+        return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
+    companion object {
+
+        fun createInstance(cardListener: CardListener) : SecondFragment =
+            SecondFragment(cardListener).apply {
+                arguments = Bundle()
+                    .also { args ->
+                        // put in bundle info from activity
+                    }
+            }
+
     }
 }

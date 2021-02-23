@@ -23,4 +23,16 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif"
         android:hint="@string/new_card_set_language"/>
+    <TextView
+        android:id="@+id/card_set_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif"
+        android:visibility="gone"
+        android:textColor="@android:color/holo_red_light"
+        android:text="@string/card_set_error_dialog"/>
 </LinearLayout>

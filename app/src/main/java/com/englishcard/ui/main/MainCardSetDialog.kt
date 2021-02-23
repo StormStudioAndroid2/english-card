@@ -4,10 +4,13 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.englishcard.R
+import org.w3c.dom.Text
 
 class MainCardSetDialog: DialogFragment() {
 
@@ -20,21 +23,28 @@ class MainCardSetDialog: DialogFragment() {
 
             builder.setView(view)
                 // Add action buttons
-                .setPositiveButton(R.string.yes,
-                    DialogInterface.OnClickListener { dialog, id ->
-                        val name = view.findViewById<TextView>(R.id.card_set_name).text.toString()
-                        val language = view.findViewById<TextView>(R.id.card_set_language).text.toString()
-                        if (name.isNotEmpty() && language.isNotEmpty()) {
-                            (activity as? MainView.DialogCallback)?.onDialogYes(name, language)
-                        } else {
-                            Toast.makeText(context, R.string.error_card_set_dialog, Toast.LENGTH_LONG).show()
-                        }
-                    })
+                .setPositiveButton(R.string.yes, null)
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
                     })
-            builder.create()
+            builder.create().apply {
+                setOnShowListener {
+                    val button: Button =
+                        (dialog as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE)
+                    button.setOnClickListener {
+                      val name = view.findViewById<EditText>(R.id.card_set_name).text
+                      val language = view.findViewById<EditText>(R.id.card_set_language).text
+                        if (name.isNotEmpty() && language.isNotEmpty()) {
+                            (activity as? MainView.DialogCallback)?.onDialogYes(name.toString(), language.toString())
+                            dismiss()
+                        } else {
+                            view.findViewById<TextView>(R.id.card_set_error).visibility = View.VISIBLE
+                        }
+
+                    }
+                }
+            }
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 }

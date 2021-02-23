@@ -15,4 +15,5 @@
     <string name="create_card_set_message">Создание набора карточек</string>
     <string name="yes">ОК</string>
     <string name="error_card_set_dialog">Поля не могут быть пустыми!</string>
+    <string name="card_set_error_dialog">Ошибка! Неверные данные</string>
 </resources>

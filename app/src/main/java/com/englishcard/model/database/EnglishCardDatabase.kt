@@ -1,13 +1,11 @@
-package com.englishcard.model
+package com.englishcard.model.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.englishcard.model.cardset.CardSetDao
-import com.englishcard.model.cardset.CardSetEntity
 
-@Database(entities = arrayOf(CardSetEntity::class), version = 1)
+@Database(entities = arrayOf(CardSetEntity::class, CardEntity::class), version = 1)
 abstract class EnglishCardDatabase : RoomDatabase() {
 
     abstract fun cardSetDao(): CardSetDao
@@ -19,7 +17,8 @@ abstract class EnglishCardDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): EnglishCardDatabase {
             synchronized(this) {
-                var instance = INSTANCE
+                var instance =
+                    INSTANCE
 
                 if (instance == null) {
                     instance = Room.databaseBuilder(
