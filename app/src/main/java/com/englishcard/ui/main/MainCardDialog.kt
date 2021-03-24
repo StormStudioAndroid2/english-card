@@ -10,21 +10,21 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.englishcard.R
-import org.w3c.dom.Text
 
-class MainCardSetDialog: DialogFragment() {
+class MainCardDialog: DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
 
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater;
-            val view = inflater.inflate(R.layout.card_set_dialog_layout, null)
+            val view = inflater.inflate(R.layout.card_dialog_layout, null)
 
             builder.setView(view)
                 // Add action buttons
                 .setPositiveButton(R.string.yes, null)
-                .setNegativeButton(R.string.cancel,
+                .setNegativeButton(
+                    R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
                     })
@@ -33,10 +33,10 @@ class MainCardSetDialog: DialogFragment() {
                     val button: Button =
                         (dialog as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE)
                     button.setOnClickListener {
-                      val name = view.findViewById<EditText>(R.id.card_set_name).text
-                      val language = view.findViewById<EditText>(R.id.card_set_language).text
-                        if (name.isNotEmpty() && language.isNotEmpty()) {
-                            (activity as? MainView.DialogCallback)?.onDialogCardSetYes(name.toString(), language.toString())
+                        val fronWord = view.findViewById<EditText>(R.id.card_front_edit_text).text
+                        val language = view.findViewById<EditText>(R.id.card_back_edit_text).text
+                        if (fronWord.isNotEmpty() && language.isNotEmpty()) {
+                            (activity as? MainView.DialogCallback)?.onDialogCardYes(fronWord.toString(), language.toString())
                             dismiss()
                         } else {
                             view.findViewById<TextView>(R.id.card_set_error).visibility = View.VISIBLE

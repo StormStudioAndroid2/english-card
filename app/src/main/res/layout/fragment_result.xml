@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:text="@string/result_title"
+        android:textColor="@color/purple_700"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@id/card_set_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/card_set_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/right_answers_text"
+        app:layout_constraintLeft_toLeftOf="@id/title_result"
+        app:layout_constraintRight_toRightOf="@id/title_result"
+        tools:text="Название набора: Английский язык" />
+
+    <TextView
+        android:id="@+id/right_answers_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/title_result"
+        app:layout_constraintRight_toRightOf="@id/title_result"
+        app:layout_constraintTop_toBottomOf="@id/card_set_title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Правильных ответов: 28" />
+
+    <TextView
+        android:id="@+id/wrong_answers_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@id/title_result"
+        app:layout_constraintRight_toRightOf="@id/title_result"
+        app:layout_constraintTop_toBottomOf="@id/right_answers_text"
+
+        tools:text="Неправильных ответов: 28" />
+
+    <TextView
+        android:id="@+id/complete_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/purple_700"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Завершить тест"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/title_result"
+        app:layout_constraintRight_toRightOf="@id/title_result"
+        app:layout_constraintTop_toBottomOf="@id/wrong_answers_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,15 @@
 package com.englishcard.model.domain.cards
 
+import android.os.Parcelable
 import com.englishcard.model.database.CardEntity
+import kotlinx.android.parcel.Parcelize
 
-class Card(private val cardEntity: CardEntity) {
+@Parcelize
+class Card(val frontWord: String, val backWord: String, val cardSetOwnerId: Long, val cardId: Long): Parcelable {
 
-     var translateWord = cardEntity.translateWord
-     var originalWord = cardEntity.originalWord
-     var cardSetId = cardEntity.cardSetId
-     var cardId = cardEntity.cardId
-
+    var isFrontShow = true
     fun convertToEntity(): CardEntity =
-        CardEntity(cardSetId, originalWord, translateWord).also { cardEntity ->
+        CardEntity(cardSetOwnerId, frontWord, backWord).also { cardEntity ->
             cardEntity.cardId = cardId
         }
 

@@ -16,4 +16,13 @@
     <string name="yes">ОК</string>
     <string name="error_card_set_dialog">Поля не могут быть пустыми!</string>
     <string name="card_set_error_dialog">Ошибка! Неверные данные</string>
+    <string name="card_front_word">Слово с передней стороны</string>
+    <string name="card_back_word">Слово с задней стороны</string>
+    <string name="help_text">Нажмите на карточку, чтобы увидеть слово с обратной стороны. Если вы его угадали, то нажмите "Слово выучено". Иначе выберите кнопку "Слово не выучено"</string>
+    <string name="button_text_fail">Слово не выучено</string>
+    <string name="button_text_success">Слово выучено</string>
+    <string name="result_title">Результаты тестирования</string>
+    <string name="result_right_answers">Правильных ответов : %s</string>
+    <string name="result_wrong_fail">Неправильных ответов : %s</string>
+    <string name="result_set_title">Название набора : %s</string>
 </resources>

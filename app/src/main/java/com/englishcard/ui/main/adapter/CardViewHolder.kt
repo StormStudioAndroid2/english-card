@@ -12,9 +12,10 @@ interface CardListener {
 
 class CardViewHolder(view: View, cardListener: CardListener): RecyclerView.ViewHolder(view) {
     val textView: TextView = view.findViewById(R.id.card_text)
+    val card: View = view.findViewById(R.id.card_view)
 
     init {
-        view.setOnClickListener {
+        card.setOnClickListener {
             cardListener.onCardClicked(adapterPosition)
         }
     }

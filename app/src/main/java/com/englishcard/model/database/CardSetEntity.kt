@@ -14,5 +14,5 @@ data class CardSetEntity(
 ) {
         @PrimaryKey(autoGenerate = true) var cardSetId: Long = 0
 
-        fun convertToDomain(): CardSet = CardSet(this, mutableListOf())
+        fun convertToDomain(): CardSet = CardSet(name, language, cardSetId, mutableListOf())
 }

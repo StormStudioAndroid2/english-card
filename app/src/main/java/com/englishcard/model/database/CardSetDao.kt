@@ -19,6 +19,6 @@ interface CardSetDao {
     fun update(cardSetEntity: CardSetEntity)
 
     @Transaction
-    @Query("SELECT * FROM card WHERE cardSetId IN (SELECT DISTINCT(cardSetId) FROM card_set)")
+    @Query("SELECT * FROM card_set")
     suspend fun getCardSetAndCards(): List<CardSetWithCards>
 }

@@ -11,10 +11,10 @@ data class CardSetWithCards(
     @Embedded val cardSetEntity: CardSetEntity,
     @Relation(
         parentColumn = "cardSetId",
-        entityColumn = "cardId"
+        entityColumn = "cardSetOwnerId"
     )
     val cards: List<CardEntity>
 ) {
 
-    fun convertToDomain(): CardSet = CardSet(cardSetEntity, cards.map(CardEntity::convertToDomain))
+    fun convertToDomain(): CardSet = CardSet(cardSetEntity.name, cardSetEntity.language, cardSetEntity.cardSetId, cards.map(CardEntity::convertToDomain))
 }

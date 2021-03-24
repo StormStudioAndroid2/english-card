@@ -10,6 +10,8 @@ abstract class EnglishCardDatabase : RoomDatabase() {
 
     abstract fun cardSetDao(): CardSetDao
 
+    abstract fun cardDao(): CardDao
+
     companion object {
 
         @Volatile

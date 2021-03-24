@@ -7,11 +7,17 @@ import com.englishcard.model.domain.cards.Card
 
 @Entity(tableName = "card")
 data class CardEntity(
-    var cardSetId: Long,
-    @ColumnInfo(name = "card_original_word") var originalWord: String,
-    @ColumnInfo(name = "card_translate_word") var translateWord: String
+    var cardSetOwnerId: Long,
+    @ColumnInfo(name = "card_front_word") var frontWord: String,
+    @ColumnInfo(name = "card_back_word") var backWord: String
 ) {
-    @PrimaryKey(autoGenerate = true) var cardId: Long = 0
+    @PrimaryKey(autoGenerate = true)
+    var cardId: Long = 0
 
-    fun convertToDomain() : Card = Card(this)
+    fun convertToDomain(): Card = Card(
+        frontWord = this.frontWord,
+        backWord = this.backWord,
+        cardSetOwnerId = this.cardSetOwnerId,
+        cardId = this.cardId
+    )
 }
